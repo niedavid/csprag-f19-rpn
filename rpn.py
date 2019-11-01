@@ -1,18 +1,14 @@
 #usr/bin/env python3
 # python doesn't complie, but rather interprets the commands in the file at runtime
 
-def add(a, b):
-    return a + b
-
-def sub(a, b):
-    return b - a
+import operator
 
 def mult(a, b):
     return a * b
 
 operators = {
-        '+': add,
-        '-': sub,
+        '+': operator.add,
+        '-': operator.sub,
         '*': mult,
         }
 
@@ -24,8 +20,8 @@ def calculate(arg):
             stack.append(value)
         except ValueError:
             function = operators[token]
-            arg1 = stack.pop()
             arg2 = stack.pop()
+            arg1 = stack.pop()
             result = function(arg1, arg2)
             stack.append(result)
 

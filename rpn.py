@@ -1,26 +1,33 @@
 #usr/bin/env python3
 # python doesn't complie, but rather interprets the commands in the file at runtime
 
+def add(a, b):
+    return a + b
+
+def sub(a, b):
+    return b - a
+
+def mult(a, b):
+    return a * b
+
+operators = {
+        '+': add,
+        '-': sub,
+        '*': mult,
+        }
+
 def calculate(arg):
     stack = list()
     for token in arg.split():
-        if token == '+':
+        try:
+            value = int(token)
+            stack.append(value)
+        except ValueError:
+            function = operators[token]
             arg1 = stack.pop()
             arg2 = stack.pop()
-            result = arg1 + arg2
+            result = function(arg1, arg2)
             stack.append(result)
-        elif token == '-':
-            arg2 = stack.pop()
-            arg1 = stack.pop()
-            result = arg1 - arg2
-            stack.append(result)
-        elif token == '*':
-            arg1 = stack.pop()
-            arg2 = stack.pop()
-            result = arg1 * arg2
-            stack.append(result)
-        else:
-            stack.append(int(token));
 
     if len(stack) != 1:
         raise TypeError('malformed input')

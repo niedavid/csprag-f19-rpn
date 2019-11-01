@@ -3,13 +3,10 @@
 
 import operator
 
-def mult(a, b):
-    return a * b
-
 operators = {
         '+': operator.add,
         '-': operator.sub,
-        '*': mult,
+        '*': operator.mul,
         }
 
 def calculate(arg):
@@ -31,8 +28,8 @@ def calculate(arg):
 
 def main():
     while True:
-        calculate(input("rpn calc> "))
-
+        result = calculate(input("rpn calc> "))
+        print(result)
 
 if __name__ == '__main__':
     main()
